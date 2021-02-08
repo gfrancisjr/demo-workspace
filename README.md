@@ -4,7 +4,7 @@ Simple Greeter is a gRPC service that prints greetings
 
 [Architecture](https://bit.ly/2YXRNkE)
 
-[Service IDL] (https://github.com/gfrancisjr/demo-workspace/blob/main/src/greeter/greeter/greeter.proto)
+[Service IDL](https://github.com/gfrancisjr/demo-workspace/blob/main/src/greeter/greeter/greeter.proto)
 
 ## Installation
 
