@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+option go_package = "github.com/gfrancisjr/demo-workspace/src/greeter/greeter";
+
+package greeter;
+
+service Greeter{
+
+    // create a greeting
+    rpc SimpleGreeting (SimpleGreetingRequest) returns (SimpleGreetingResponse);
+
+}
+
+// message containing the greeting request
+message SimpleGreetingRequest {
+  enum Type {
+    UNKNOWN = 0;
+    HELLO = 1;
+    GOOD_MORNING = 2;
+    GOOD_NIGHT = 3;
+    HAPPY_BIRTHDAY = 4;
+    MERRY_XMAS = 5;
+  }
+
+   Type type = 1;
+   string name = 2;
+}
+
+// message containing the greeting response
+message SimpleGreetingResponse {
+   string greeting = 1;
+}

@@ -1,0 +1,21 @@
+FROM golang:1.15-alpine AS build
+
+WORKDIR /src/github.com/gfrancisjr/demo-workspace/
+COPY go.mod .
+COPY go.sum .
+
+# grab dependencies
+RUN go mod download
+
+COPY . .
+
+# run tests
+RUN cd src/greeter/greeting_server/ && CGO_ENABLED=0 go test ./...
+
+# run build server
+RUN cd src/greeter/greeting_server/ && CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -installsuffix cgo -o /go/bin/greeting_server
+
+# create small image with just the greeting server binary
+FROM scratch 
+COPY --from=build /go/bin/greeting_server /go/bin/greeting_server
+ENTRYPOINT ["/go/bin/greeting_server"]

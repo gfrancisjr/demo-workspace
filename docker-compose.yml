@@ -1,0 +1,19 @@
+version: "3"
+services:
+  greeting_server:
+    build:
+      context: .
+      dockerfile: ServerDockerfile
+    ports:
+      - "10000:10000"  
+    network_mode: "host"
+  greeting_client:
+    environment:
+      - GREETING_TYPE
+      - RECEPIENT
+    depends_on:
+      - "greeting_server"
+    build:
+      context: .
+      dockerfile: ClientDockerfile
+    network_mode: "host"
